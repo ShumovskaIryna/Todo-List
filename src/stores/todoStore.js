@@ -15,5 +15,10 @@ export const useTodoStore = defineStore('todoList', {
         return this.tasks.filter(t => !t.isDone)
       },
     },
+    actions: {
+      addTask(task){
+        this.tasks.push(task)
+      }
+    }
   },
 )

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="task-input">
-      <input>
+      <TodoForm />
     </div>
 
     <nav class="filter">
@@ -29,10 +29,11 @@
 <script>
 import { useTodoStore } from '@/stores/todoStore'
 import TodoItem from '../components/TodoItem.vue'
+import TodoForm from '../components/TodoForm.vue'
 import { ref } from 'vue'
 
 export default {
-  components: { TodoItem},
+  components: { TodoItem, TodoForm},
   setup() {
 	const todoStore = useTodoStore()
   const filter = ref('isNotDone')
