@@ -18,7 +18,12 @@ export const useTodoStore = defineStore('todoList', {
     actions: {
       addTask(task){
         this.tasks.push(task)
-      }
+      },
+      removeTask(id){
+        this.tasks = this.tasks.filter(t => {
+          return t.id !== id
+        })
+      },
     }
   },
 )

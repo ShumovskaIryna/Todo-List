@@ -7,7 +7,7 @@
         <h3>{{ todo.title }}</h3>
         <div class="icons">
             <font-awesome-icon 
-            @click="removeTodo(todo.id)" 
+            @click="todoStore.removeTask(todo.id)" 
             icon="fa-solid fa-trash" 
             style="color: #ff0095;" 
             />
@@ -21,12 +21,17 @@
 </template>
   
 <script>
+import { useTodoStore } from '@/stores/todoStore'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 library.add(faTrash, faPen)
 
 export default {
     props: ['todo'],
+    setup() {
+    const todoStore = useTodoStore()
 
+    return { todoStore }
+    }
 }
 </script>
