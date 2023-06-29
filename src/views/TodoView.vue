@@ -49,37 +49,35 @@ export default {
 </script>
 
 <style lang="scss">
-  .task-input{
-  font-size: 60px;
-  margin: 20px;
-  }
-  .button button{
-  font-size: 20px;
-  margin: 10px;
-  }
-
-	$light: #EEE;
-	$grey: #888;
-	$dark: #313154;
-	$shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'montserrat', sans-serif;
+.home { 
+  width: 100%;
 }
 
-input:not([type="radio"]):not([type="checkbox"]), button {
-	appearance: none;
-	border: none;
-	outline: none;
-	background: white;
-	cursor: initial;
+.task-input {
+  height: 50px;
+  width: 90%;
+  margin: 30px auto;
 }
 
-body {
-	background: $light;
-	color: $dark;
+.filter {
+  display: flex;
+  height: 30px;
+  width: 90%;
+  margin: 30px auto;
+  justify-content: end;
+  align-items: center;
+}
+.filter button {
+  display: flex;
+  min-width: 80px;
+  align-items: center;
+  justify-content: space-around;
+}
+.list {
+  height: auto;
+  width: 90%;
+  margin: 10px auto;
+  justify-content: center;
+  align-items: center;
 }
 </style>
