@@ -48,6 +48,20 @@ export const useTodoStore = defineStore('todoList', {
           console.log(res.error)
         }
       },
+      async doTask(id) {
+        const task = this.tasks.find(t => t.id === id)
+        task.isDone = !task.isDone
+  
+        const res = await fetch('http://localhost:3000/tasks/' + id, {
+          method: 'PATCH',
+          body: JSON.stringify({ isDone: task.isDone }),
+          headers: {'Content-Type': 'application/json'}
+        })
+  
+        if (res.error) {
+          console.log(res.error)
+        }
+      }
     }
   },
 )
