@@ -9,37 +9,29 @@
     </div>
     <hr>
     <div class="list" id="todo-list">
-
-    <div v-for="todo in todoStore.tasks" :class="`todo-list`" v-bind:key="todo.id">
-      <label>
-        <input type="checkbox" v-model="todo.isDone" />
-      </label>
-      <div class="todo-content">
-        <input type="text" v-model="todo.title" />
-      </div>
-
-      <div class="actions">
-        <button class="delete" @click="removeTodo(todo)">Delete</button>
-      </div>
-    </div>
-
+		<div v-for="todo in todoStore.tasks" v-bind:key="todo.id">
+			<TodoList :todo="todo" />
+		</div>
     </div>
   </div>
 </template>
 
-<script setup>
-// import { ref, computed } from 'vue'
+<script>
 import { useTodoStore } from '@/stores/todoStore'
+import TodoList from '../components/TodoList.vue'
 
-const todoStore = useTodoStore()
-const removeTodo = (todo) => {
-	todoStore.value = todoStore.value.filter((t) => t !== todo)
+export default {
+  components: { TodoList},
+  setup() {
+	const todoStore = useTodoStore()
+
+	return { todoStore }
+  }
 }
-// const count = ref(0)
 
 </script>
 
-<style>
+<style lang="scss">
   .task-input{
     font-size: 60px;
     margin: 20px;
@@ -49,13 +41,10 @@ const removeTodo = (todo) => {
     margin: 10px;
   }
 
-  :root {
-	--light: #EEE;
-	--grey: #888;
-	--dark: #313154;
-
-	--shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+	$light: #EEE;
+	$grey: #888;
+	$dark: #313154;
+	$shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
 * {
 	margin: 0;
@@ -68,12 +57,12 @@ input:not([type="radio"]):not([type="checkbox"]), button {
 	appearance: none;
 	border: none;
 	outline: none;
-	background: none;
+	background: white;
 	cursor: initial;
 }
 
 body {
-	background: var(--light);
-	color: var(--dark);
+	background: $light;
+	color: $dark;
 }
 </style>
