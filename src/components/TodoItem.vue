@@ -2,7 +2,7 @@
 <template>
     <div class="task">
         <label>
-            <input type="checkbox" v-model="todo.isDone" />
+            <input type="checkbox" @click="todoStore.doTask(todo.id)" v-model="todo.isDone" />
         </label>
         <h3>{{ todo.title }}</h3>
         <div class="icons">

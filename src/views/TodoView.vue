@@ -9,6 +9,10 @@
       <button @click="filter = 'isDone'">Is Done</button>
     </nav>
 
+    <div v-if="todoStore.loading" class="loading">
+      Loading tasks...
+    </div>
+    
     <div v-if="filter === 'isNotDone'" class="list" id="todo-list">
       ToDo List {{todoStore.notDoneCount}}
       <div v-for="todo in todoStore.taskIsNotDone" v-bind:key="todo.id">
@@ -36,6 +40,7 @@ export default {
   components: { TodoItem, TodoForm},
   setup() {
 	const todoStore = useTodoStore()
+  todoStore.getTasks()
   const filter = ref('isNotDone')
 	return { todoStore, filter }
   }
