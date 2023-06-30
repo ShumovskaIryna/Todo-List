@@ -4,7 +4,7 @@
         <label>
             <input type="checkbox" @click="todoStore.doTask(todo.id)" v-model="todo.isDone" />
         </label>
-        <div v-if="isInputAllowed">
+        <div class="update-mood" v-if="isInputAllowed">
             <input 
                 type="text" 
                 v-model="inputValue"
@@ -16,7 +16,7 @@
             </button>
         </div>
 
-        <div v-else>
+        <div class="general-mood" v-else>
             <input type="text" v-model="todo.title" disabled>
             <div class="icons">
                 <font-awesome-icon 
@@ -49,22 +49,7 @@ export default {
     setup() {
         const todoStore = useTodoStore()
 
-        // const inputValue = ref('')
-
-        // const handleSubmit = () => {
-        // if (inputValue.value.length > 0) {
-        //     todoStore.addTask({
-        //     id: todoStore.tasks?.length + 1,
-        //     title: inputValue.value,
-        //     isDone: false})
-        //     inputValue.value = ""
-        // }
-        // }
-
-        return { todoStore, 
-            // handleSubmit, 
-            // inputValue 
-        }
+        return { todoStore }
     },
     data() {
         return {
@@ -93,31 +78,39 @@ export default {
 
 <style lang="scss">
 
-.task {
+%flex_row {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.task {
     height: auto;
     width: 100%;
     margin: 5px auto;
     padding: 5px 20px;
     background-color: rgb(255, 255, 255);
-    flex-direction: row;
-    justify-content: space-between;
-    div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    @extend %flex_row;
+    .update-mood{
+        flex: 12;
+        justify-content: space-between;
+        @extend %flex_row;
+    }
+    .general-mood{
+        flex: 12;
+        @extend %flex_row;
+    }
+    label {
+        flex: 1;
     }
 }
-
 h4 {
   font-weight: 600;
   text-align: center;
   color: black;
 }
 .icons {
-display: flex;
-justify-content: space-between;
-margin-top: 8px;
+    @extend %flex_row;
+    margin-top: 8px;
 }
 
 </style>

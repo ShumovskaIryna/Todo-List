@@ -36,6 +36,12 @@ export default {
 
 <style lang="scss">
 
+%none {
+  border: none;
+  outline: none;
+  cursor: initial;
+}
+
 form {
   display: flex;
   justify-content: space-between;
@@ -49,23 +55,19 @@ input:not([type="radio"]):not([type="checkbox"]) {
   padding: 5px 20px;
   font-size: 18px;
   font-weight: 600;
-  border: none;
-  outline: none;
   background: white;
-  cursor: initial;
+  @extend %none;
 }
 
 button {
   min-width: 20%;
   height: 100%;
   padding: 5px 5px;
-  border: none;
-  outline: none;
   background: rgb(0, 0, 0);
   color: white;
   font-weight: 600;
-  cursor: initial;
   margin-left: 5px;
+  @extend %none;
 }
 
 </style>
