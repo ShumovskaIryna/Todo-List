@@ -61,7 +61,7 @@ export default {
     methods: {
         isDisabled(todo) {
             this.isInputAllowed = !this.isInputAllowed;
-            console.log(todo?.id, 333, this.isInputAllowed);
+            console.log(todo?.id, this.isInputAllowed);
             return this.isInputAllowed;
         },
 
@@ -77,7 +77,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 %flex_row {
     display: flex;
     flex-direction: row;
@@ -112,5 +111,4 @@ h4 {
     @extend %flex_row;
     margin-top: 8px;
 }
-
 </style>

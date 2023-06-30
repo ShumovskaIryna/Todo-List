@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .statistic { 
   width: 100%;
   margin: 50px auto;
