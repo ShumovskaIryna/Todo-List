@@ -1,31 +1,42 @@
 <template>
   <div class="home">
-    <h1>HOME</h1>
     <div class="task-input">
       <input>
     </div>
-    <div class="button">
-      <button>Add new task</button>
+
+    <nav class="filter">
+      <button @click="filter = 'isNotDone'">ToDo List</button>
+      <button @click="filter = 'isDone'">Is Done</button>
+    </nav>
+
+    <div v-if="filter === 'isNotDone'" class="list" id="todo-list">
+      ToDo List {{todoStore.notDoneCount}}
+      <div v-for="todo in todoStore.taskIsNotDone" v-bind:key="todo.id">
+        <TodoItem :todo="todo" />
+      </div>
     </div>
-    <hr>
-    <div class="list" id="todo-list">
-		<div v-for="todo in todoStore.tasks" v-bind:key="todo.id">
-			<TodoList :todo="todo" />
-		</div>
+
+    <div v-if="filter === 'isDone'" class="list" id="todo-list">
+      is Done {{todoStore.doneCount}}
+      <div v-for="todo in todoStore.taskIsDone" v-bind:key="todo.id">
+        <TodoItem :todo="todo" />
+      </div>
     </div>
+
   </div>
 </template>
 
 <script>
 import { useTodoStore } from '@/stores/todoStore'
-import TodoList from '../components/TodoList.vue'
+import TodoItem from '../components/TodoItem.vue'
+import { ref } from 'vue'
 
 export default {
-  components: { TodoList},
+  components: { TodoItem},
   setup() {
 	const todoStore = useTodoStore()
-
-	return { todoStore }
+  const filter = ref('isNotDone')
+	return { todoStore, filter }
   }
 }
 
@@ -33,12 +44,12 @@ export default {
 
 <style lang="scss">
   .task-input{
-    font-size: 60px;
-    margin: 20px;
+  font-size: 60px;
+  margin: 20px;
   }
   .button button{
-    font-size: 20px;
-    margin: 10px;
+  font-size: 20px;
+  margin: 10px;
   }
 
 	$light: #EEE;
