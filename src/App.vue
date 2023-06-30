@@ -23,7 +23,6 @@ $shadow: 0 5px 15px rgb(0, 0, 0);
 
 %flex_space {
   display: flex;
-  align-items: center;
   justify-content: space-around;
 }
 * {
