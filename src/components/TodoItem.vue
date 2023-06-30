@@ -14,7 +14,7 @@
             <font-awesome-icon 
             v-if="!todo.isDone" 
             icon="fa-solid fa-pen" 
-            style="color: #00bfff;" 
+            style="color: #00bfff; margin-left: 10px;" 
             />
         </div>
     </div>
@@ -53,7 +53,10 @@ h4 {
   font-weight: 600;
   text-align: center;
   color: black;
-
+}
+.icons {
+display: flex;
+justify-content: space-around;
 }
 
 </style>
