@@ -4,7 +4,7 @@
         <label>
             <input type="checkbox" @click="todoStore.doTask(todo.id)" v-model="todo.isDone" />
         </label>
-        <h3>{{ todo.title }}</h3>
+        <h4>{{ todo.title }}</h4>
         <div class="icons">
             <font-awesome-icon 
             @click="todoStore.removeTask(todo.id)" 
@@ -47,7 +47,13 @@ export default {
     background-color: rgb(255, 255, 255);
     flex-direction: row;
     justify-content: space-between;
-    color: black;
-    font-weight: 700;
 }
+
+h4 {
+  font-weight: 600;
+  text-align: center;
+  color: black;
+
+}
+
 </style>

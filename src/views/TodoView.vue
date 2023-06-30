@@ -10,18 +10,18 @@
     </nav>
 
     <div v-if="todoStore.loading" class="loading">
-      Loading tasks...
+      <h3>Loading tasks...</h3>
     </div>
     
     <div v-if="filter === 'isNotDone'" class="list" id="todo-list">
-      ToDo List {{todoStore.notDoneCount}}
+      <h3>ToDo List</h3>
       <div v-for="todo in todoStore.taskIsNotDone" v-bind:key="todo.id">
         <TodoItem :todo="todo" />
       </div>
     </div>
 
     <div v-if="filter === 'isDone'" class="list" id="todo-list">
-      is Done {{todoStore.doneCount}}
+      <h3>is Done</h3>
       <div v-for="todo in todoStore.taskIsDone" v-bind:key="todo.id">
         <TodoItem :todo="todo" />
       </div>
@@ -52,13 +52,11 @@ export default {
 .home { 
   width: 100%;
 }
-
 .task-input {
   height: 50px;
   width: 90%;
   margin: 30px auto;
 }
-
 .filter {
   display: flex;
   height: 30px;
@@ -72,6 +70,11 @@ export default {
   min-width: 80px;
   align-items: center;
   justify-content: space-around;
+}
+h3 {
+  font-weight: 600;
+  text-align: center;
+  color: white;
 }
 .list {
   height: auto;
