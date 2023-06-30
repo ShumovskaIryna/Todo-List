@@ -35,3 +35,19 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+
+.task {
+    display: flex;
+    height: auto;
+    width: 90%;
+    margin: 5px auto;
+    padding: 5px 30px;
+    background-color: rgb(255, 255, 255);
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    font-weight: 700;
+}
+</style>

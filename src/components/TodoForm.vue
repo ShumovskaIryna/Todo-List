@@ -33,3 +33,39 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+
+form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  cursor: initial;
+}
+input:not([type="radio"]):not([type="checkbox"]) {
+  width: 80%;
+  height: 99%;
+  padding: 5px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  background: white;
+  cursor: initial;
+}
+
+button {
+  min-width: 20%;
+  height: 100%;
+  padding: 5px 5px;
+  border: none;
+  outline: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  font-weight: 600;
+  cursor: initial;
+  margin-left: 5px;
+}
+
+</style>
