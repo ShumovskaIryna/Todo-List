@@ -80,12 +80,12 @@ export default {
             return this.isInputAllowed;
         },
 
-        updateData(todo) {
+        updateData(todoId) {
             if (!this.inputValue.length) {
                 console.error('empty');
             }
             this.isInputAllowed = !this.isInputAllowed;
-            this.todoStore.updateTask(todo.id, this.inputValue);
+            this.todoStore.updateTask(todoId, this.inputValue);
         }
     }
 }
