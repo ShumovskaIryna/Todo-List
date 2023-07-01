@@ -36,7 +36,8 @@ body {
 	color: $light;
 }
 .app {
-  max-width: 600px;
+  max-width: 800px;
+  min-width: 300px;
   margin: 0 auto;
   min-height: 100vh;
   box-shadow: $shadow;

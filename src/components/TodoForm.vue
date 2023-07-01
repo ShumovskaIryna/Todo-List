@@ -59,10 +59,9 @@ form {
   cursor: initial;
 }
 input:not([type="radio"]):not([type="checkbox"]) {
-  width: 80%;
+  width: 90%;
   height: 99%;
-  padding: 5px 20px;
-  font-size: 18px;
+  padding: 5px 5px;
   font-weight: 600;
   background: white;
   @extend %none;
