@@ -1,12 +1,10 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <div class="input-container">
       <input 
         type="text" 
         placeholder="I need to..."
         v-model="newTodoItem"
       >
-    </div>
     <button>Add</button>
   </form>
 </template>
