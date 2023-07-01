@@ -1,4 +1,17 @@
 import { defineStore } from 'pinia'
+import { v4 as uuidv4 } from 'uuid';
+
+/**
+ * json-server does not return created entity. But we still need id in store.
+ * It is a hack 🙂
+ * @param {object} task 
+ */
+function formTaskWithId(task) {
+  return {
+    ...task,
+    id: uuidv4(),
+  }
+}
 
 export const useTodoStore = defineStore('todoList', {
     state: () => ({
@@ -23,11 +36,12 @@ export const useTodoStore = defineStore('todoList', {
         this.loading = false
       },
       async addTask(task) {
-        this.tasks.push(task)
+        const newTaskWithId = formTaskWithId(task);
+        this.tasks.push(newTaskWithId)
   
         const res = await fetch('http://localhost:3000/tasks', {
           method: 'POST',
-          body: JSON.stringify(task),
+          body: JSON.stringify(newTaskWithId),
           headers: {'Content-Type': 'application/json'}
         })
   
