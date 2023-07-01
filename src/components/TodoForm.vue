@@ -5,9 +5,7 @@
         type="text" 
         placeholder="I need to..."
         v-model="newTodoItem"
-        required
       >
-      <p v-if="!isInputValid" class="error-text">Minimum length is {{ minimumLength }} characters.</p>
     </div>
     <button>Add</button>
   </form>
@@ -16,30 +14,35 @@
 <script>
 import { ref } from 'vue'
 import { useTodoStore } from '../stores/todoStore'
+import { useToast } from 'vue-toastification'
+import { isTodoValid } from '@/utils/utils'
 
 export default {
   setup() {
     const todoStore = useTodoStore()
+    const toast = useToast()
 
     const newTodoItem = ref('')
-    const isInputValid = ref(true)
     const minimumLength = 1
-
     const handleSubmit = () => {
-      if (newTodoItem.value.length >= minimumLength) {
+      if (isTodoValid(newTodoItem.value)) {
         todoStore.addTask({
           id: todoStore.tasks?.length + 1,
           title: newTodoItem.value,
           isDone: false
         })
         newTodoItem.value = ""
-        isInputValid.value = true
+        showToast('Task added successfully', 'success')
       } else {
-        isInputValid.value = false
+        showToast('Please provide correct text', 'error')
       }
     }
 
-    return { handleSubmit, newTodoItem, isInputValid, minimumLength }
+    const showToast = (message, type) => {
+      toast[type](message);
+    }
+
+    return { handleSubmit, newTodoItem, minimumLength }
   }
 }
 </script>
@@ -75,8 +78,5 @@ button {
   font-weight: 600;
   margin-left: 5px;
   @extend %none;
-}
-.error-text {
-  color: red;
 }
 </style>
