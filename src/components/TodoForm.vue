@@ -1,12 +1,14 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <input 
-      type="text" 
-      placeholder="I need to..."
-      v-model="newTodoItem"
-      required
-    >
-    <!-- <p class="alert">{{ errorMessage }}</p> -->
+    <div class="input-container">
+      <input 
+        type="text" 
+        placeholder="I need to..."
+        v-model="newTodoItem"
+        required
+      >
+      <p v-if="!isInputValid" class="error-text">Minimum length is {{ minimumLength }} characters.</p>
+    </div>
     <button>Add</button>
   </form>
 </template>
@@ -20,39 +22,25 @@ export default {
     const todoStore = useTodoStore()
 
     const newTodoItem = ref('')
+    const isInputValid = ref(true)
+    const minimumLength = 1
 
     const handleSubmit = () => {
-      if (newTodoItem.value.length > 0) {
-          todoStore.addTask({
+      if (newTodoItem.value.length >= minimumLength) {
+        todoStore.addTask({
           id: todoStore.tasks?.length + 1,
           title: newTodoItem.value,
-          isDone: false})
+          isDone: false
+        })
         newTodoItem.value = ""
+        isInputValid.value = true
+      } else {
+        isInputValid.value = false
       }
     }
 
-    return { handleSubmit, newTodoItem }
-  },
-  // data() {
-  //   return {
-  //     errorMessage: ''
-  //   }
-  // },
-  // methods: {
-  //   validateTask(newTodoItem) {
-  //     if (newTodoItem.value.length > 0) {
-  //       this.errorMessage = ''
-  //     } else {
-  //       this.errorMessage = 'You need to write smth'
-  //     }
-  //   }
-  // },
-  // watch: {
-  //   newTodoItem(value){
-  //     this.newTodoItem = value;
-  //     this.validateTask(value);
-  //   }
-  // },
+    return { handleSubmit, newTodoItem, isInputValid, minimumLength }
+  }
 }
 </script>
 
@@ -88,12 +76,7 @@ button {
   margin-left: 5px;
   @extend %none;
 }
-// .alert {
-//   position: absolute;
-//   top: 21%;
-//   opacity: 0.6;
-//   width: 140px;
-//   background-color: plum;
-//   color: rgb(62, 0, 0);
-// }
+.error-text {
+  color: red;
+}
 </style>
