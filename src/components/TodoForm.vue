@@ -4,7 +4,9 @@
       type="text" 
       placeholder="I need to..."
       v-model="newTodoItem"
+      required
     >
+    <!-- <p class="alert">{{ errorMessage }}</p> -->
     <button>Add</button>
   </form>
 </template>
@@ -30,18 +32,36 @@ export default {
     }
 
     return { handleSubmit, newTodoItem }
-  }
+  },
+  // data() {
+  //   return {
+  //     errorMessage: ''
+  //   }
+  // },
+  // methods: {
+  //   validateTask(newTodoItem) {
+  //     if (newTodoItem.value.length > 0) {
+  //       this.errorMessage = ''
+  //     } else {
+  //       this.errorMessage = 'You need to write smth'
+  //     }
+  //   }
+  // },
+  // watch: {
+  //   newTodoItem(value){
+  //     this.newTodoItem = value;
+  //     this.validateTask(value);
+  //   }
+  // },
 }
 </script>
 
 <style lang="scss">
-
 %none {
   border: none;
   outline: none;
   cursor: initial;
 }
-
 form {
   display: flex;
   justify-content: space-between;
@@ -58,7 +78,6 @@ input:not([type="radio"]):not([type="checkbox"]) {
   background: white;
   @extend %none;
 }
-
 button {
   min-width: 20%;
   height: 100%;
@@ -69,5 +88,12 @@ button {
   margin-left: 5px;
   @extend %none;
 }
-
+// .alert {
+//   position: absolute;
+//   top: 21%;
+//   opacity: 0.6;
+//   width: 140px;
+//   background-color: plum;
+//   color: rgb(62, 0, 0);
+// }
 </style>

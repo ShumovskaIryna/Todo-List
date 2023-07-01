@@ -15,7 +15,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style lang="scss">
-
 $light: #EEE;
 $grey: #888;
 $dark: #313154;
@@ -24,7 +23,6 @@ $shadow: 0 5px 15px rgb(0, 0, 0);
 
 %flex_space {
   display: flex;
-  align-items: center;
   justify-content: space-around;
 }
 * {
@@ -68,6 +66,4 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.7);
   @extend %flex_space;
 }
-
-
 </style>

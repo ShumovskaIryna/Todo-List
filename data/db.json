@@ -1,34 +1,24 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "play gloomhaven",
+      "id": "2d4044c3-6480-4c21-bd90-bbb20a7ba923",
+      "title": "Go sleep",
       "isDone": true
     },
     {
-      "id": 2,
-      "title": "mow the lawn",
-      "isDone": true
+      "id": "2b7fa696-ee57-4688-bd5b-f98198ef4b64",
+      "title": "do sport",
+      "isDone": false
     },
     {
-      "title": "become an eldern lord",
-      "id": 3,
-      "isDone": true
+      "id": "bd5f8d24-c227-42dc-9a6f-6bffafc2ad57",
+      "title": "eat from 1pm",
+      "isDone": false
     },
     {
-      "title": "eat some pinapples",
-      "id": 4,
-      "isDone": true
-    },
-    {
-      "id": 5,
-      "title": "ddfdfdfd",
-      "isDone": true
-    },
-    {
-      "id": 6,
-      "title": "fdfsfcsdc",
-      "isDone": true
+      "id": "504cbe7d-9bb8-47b5-9e98-7c580dffc1a4",
+      "title": "go to sleep",
+      "isDone": false
     }
   ]
 }

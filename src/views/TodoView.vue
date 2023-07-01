@@ -26,6 +26,18 @@
         <TodoItem :todo="todo" />
       </div>
     </div>
+    <!-- <paginate
+      v-model="page"
+      :page-count="8"
+      :page-range="2"
+      :margin-pages="2"
+      :click-handler="clickCallback"
+      :prev-text="'Prev'"
+      :next-text="'Next'"
+      :container-class="'pagination'"
+      :page-class="'list'"
+    >
+    </paginate> -->
 
   </div>
 </template>
@@ -34,16 +46,29 @@
 import { useTodoStore } from '@/stores/todoStore'
 import TodoItem from '../components/TodoItem.vue'
 import TodoForm from '../components/TodoForm.vue'
+// import Paginate from 'vuejs-paginate-next';
 import { ref } from 'vue'
 
 export default {
-  components: { TodoItem, TodoForm},
+  components: { TodoItem, TodoForm,
+    //  paginate: Paginate,
+    },
+  // methods: {
+  //   clickCallback (pageNum) {
+  //     console.log(pageNum)
+  //   }
+  // },
   setup() {
 	const todoStore = useTodoStore()
   todoStore.getTasks()
   const filter = ref('isNotDone')
 	return { todoStore, filter }
-  }
+  },
+  // data() {
+  //     return {
+  //       page: 12,
+  //     };
+  //   },
 }
 
 </script>
