@@ -15,62 +15,113 @@
     
     <div v-if="filter === 'isNotDone'" class="list" id="todo-list">
       <h3>ToDo List</h3>
-      <div v-for="todo in todoStore.taskIsNotDone" v-bind:key="todo.id">
+      <div v-for="todo in paginatedTaskIsNotDone" v-bind:key="todo.id">
         <TodoItem :todo="todo" />
+      </div>
+      <div class="pagination">
+        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+        <button class="current"> {{ currentPage }} </button>
+        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
       </div>
     </div>
 
     <div v-if="filter === 'isDone'" class="list" id="todo-list">
       <h3>is Done</h3>
-      <div v-for="todo in todoStore.taskIsDone" v-bind:key="todo.id">
+      <div v-for="todo in paginatedTaskIsDone" v-bind:key="todo.id">
         <TodoItem :todo="todo" />
       </div>
+      <div class="pagination">
+        <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
+        <button class="current"> {{ currentPage }} </button>
+        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      </div>
     </div>
-    <!-- <paginate
-      v-model="page"
-      :page-count="8"
-      :page-range="2"
-      :margin-pages="2"
-      :click-handler="clickCallback"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'pagination'"
-      :page-class="'list'"
-    >
-    </paginate> -->
-
   </div>
 </template>
 
 <script>
 import { useTodoStore } from '@/stores/todoStore'
-import TodoItem from '../components/TodoItem.vue'
-import TodoForm from '../components/TodoForm.vue'
-// import Paginate from 'vuejs-paginate-next';
-import { ref } from 'vue'
+import TodoItem from '@/components/TodoItem.vue'
+import TodoForm from '@/components/TodoForm.vue'
 
+import { ref, computed } from 'vue'
+
+/**
+ * TodoView component
+ */
 export default {
-  components: { TodoItem, TodoForm,
-    //  paginate: Paginate,
-    },
-  // methods: {
-  //   clickCallback (pageNum) {
-  //     console.log(pageNum)
-  //   }
-  // },
-  setup() {
-	const todoStore = useTodoStore()
-  todoStore.getTasks()
-  const filter = ref('isNotDone')
-	return { todoStore, filter }
+  components: { 
+    TodoItem, 
+    TodoForm,
   },
-  // data() {
-  //     return {
-  //       page: 12,
-  //     };
-  //   },
-}
 
+  setup() {
+    const todoStore = useTodoStore()
+    const filter = ref('isNotDone')
+    const currentPage = ref(1)
+    const pageSize = 8
+
+    /**
+     * Get tasks from the store
+     */
+    todoStore.getTasks();
+
+    /**
+     * Computed property for paginated task list of 'isNotDone' filter
+     */
+    const paginatedTaskIsNotDone = computed(() => {
+      const startIndex = (currentPage.value - 1) * pageSize
+      const endIndex = startIndex + pageSize
+      return todoStore.taskIsNotDone.slice(startIndex, endIndex)
+    })
+
+    /**
+     * Computed property for paginated task list of 'isDone' filter
+     */
+    const paginatedTaskIsDone = computed(() => {
+      const startIndex = (currentPage.value - 1) * pageSize
+      const endIndex = startIndex + pageSize
+      return todoStore.taskIsDone.slice(startIndex, endIndex)
+    })
+
+    /**
+     * Computed property for total number of pages based on the current filter
+     */
+    const totalPages = computed(() => {
+      return Math.ceil(filter.value === 'isNotDone' ? todoStore.taskIsNotDone.length / pageSize : todoStore.taskIsDone.length / pageSize)
+    })
+
+    /**
+     * Go to the previous page of the paginated list
+     */
+    const previousPage = () => {
+      if (currentPage.value > 1) {
+        currentPage.value--
+      }
+    }
+
+    /**
+     * Go to the next page of the paginated list
+     */
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) {
+        currentPage.value++
+      }
+    }
+
+    return { 
+      todoStore, 
+      filter, 
+      currentPage, 
+      pageSize, 
+      paginatedTaskIsNotDone, 
+      paginatedTaskIsDone, 
+      totalPages, 
+      previousPage, 
+      nextPage,
+    }
+  },
+}
 </script>
 
 <style lang="scss">
@@ -107,5 +158,17 @@ h3 {
   margin: 10px auto;
   justify-content: center;
   align-items: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.pagination button {
+  margin: 0 5px;
+}
+.current {
+  width: 20px;
+  background-color: grey;
 }
 </style>

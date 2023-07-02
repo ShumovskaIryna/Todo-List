@@ -1,12 +1,10 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <input 
-      type="text" 
-      placeholder="I need to..."
-      v-model="newTodoItem"
-      required
-    >
-    <!-- <p class="alert">{{ errorMessage }}</p> -->
+      <input 
+        type="text" 
+        placeholder="I need to..."
+        v-model="newTodoItem"
+      >
     <button>Add</button>
   </form>
 </template>
@@ -14,45 +12,36 @@
 <script>
 import { ref } from 'vue'
 import { useTodoStore } from '../stores/todoStore'
+import { useToast } from 'vue-toastification'
+import { isTodoValid } from '@/utils/utils'
 
 export default {
   setup() {
     const todoStore = useTodoStore()
+    const toast = useToast()
 
     const newTodoItem = ref('')
-
+    const minimumLength = 1
     const handleSubmit = () => {
-      if (newTodoItem.value.length > 0) {
-          todoStore.addTask({
+      if (isTodoValid(newTodoItem.value)) {
+        todoStore.addTask({
           id: todoStore.tasks?.length + 1,
           title: newTodoItem.value,
-          isDone: false})
+          isDone: false
+        })
         newTodoItem.value = ""
+        showToast('Task added successfully', 'success')
+      } else {
+        showToast('Please provide correct text', 'error')
       }
     }
 
-    return { handleSubmit, newTodoItem }
-  },
-  // data() {
-  //   return {
-  //     errorMessage: ''
-  //   }
-  // },
-  // methods: {
-  //   validateTask(newTodoItem) {
-  //     if (newTodoItem.value.length > 0) {
-  //       this.errorMessage = ''
-  //     } else {
-  //       this.errorMessage = 'You need to write smth'
-  //     }
-  //   }
-  // },
-  // watch: {
-  //   newTodoItem(value){
-  //     this.newTodoItem = value;
-  //     this.validateTask(value);
-  //   }
-  // },
+    const showToast = (message, type) => {
+      toast[type](message);
+    }
+
+    return { handleSubmit, newTodoItem, minimumLength }
+  }
 }
 </script>
 
@@ -88,12 +77,4 @@ button {
   margin-left: 5px;
   @extend %none;
 }
-// .alert {
-//   position: absolute;
-//   top: 21%;
-//   opacity: 0.6;
-//   width: 140px;
-//   background-color: plum;
-//   color: rgb(62, 0, 0);
-// }
 </style>

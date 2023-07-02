@@ -39,17 +39,21 @@
   
 <script>
 import { useTodoStore } from '@/stores/todoStore'
-// import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
+import { isTodoValid } from '@/utils/utils'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faTrash, faPen)
 
 export default {
     props: ['todo'],
     setup() {
         const todoStore = useTodoStore()
+        const toast = useToast()
 
-        return { todoStore }
+        return { todoStore, toast }
     },
     data() {
         return {
@@ -59,15 +63,16 @@ export default {
     },
 
     methods: {
-        isDisabled(todo) {
+        isDisabled() {
             this.isInputAllowed = !this.isInputAllowed;
-            console.log(todo?.id, this.isInputAllowed);
             return this.isInputAllowed;
         },
 
         updateData(todoId) {
-            if (!this.inputValue.length) {
-                console.error('empty');
+            if (!isTodoValid(this.inputValue)) {
+                this.toast.error('Please provide correct text');
+
+                return;
             }
             this.isInputAllowed = !this.isInputAllowed;
             this.todoStore.updateTask(todoId, this.inputValue);

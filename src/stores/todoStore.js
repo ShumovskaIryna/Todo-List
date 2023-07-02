@@ -27,6 +27,10 @@ export const useTodoStore = defineStore('todoList', {
       },
     },
     actions: {
+      /**
+       * !!!!! WE DO NOT HAVE X-Total-Count EVEN WHEN WE SEND limit 
+       * THATS WHY WE HAVE PAGINATION AS IT IS :-)
+       */
       async getTasks() {
         this.loading = true
         const res = await fetch('http://localhost:3000/tasks')
