@@ -82,38 +82,104 @@ export default {
 </script>
 
 <style lang="scss">
+$form-control-color: rgb(0, 148, 0);
 %flex_row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+%none {
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: initial;
+}
 .task {
     height: auto;
     width: 100%;
     margin: 5px auto;
-    padding: 5px 20px;
+    padding: 5px 10px;
     background-color: rgb(255, 255, 255);
     @extend %flex_row;
     .update-mood{
-        flex: 12;
+        flex: 15;
         justify-content: space-between;
         @extend %flex_row;
     }
     .general-mood{
-        flex: 12;
+        flex: 15;
         @extend %flex_row;
     }
     label {
         flex: 1;
     }
 }
-h4 {
-  font-weight: 600;
-  text-align: center;
-  color: black;
+@media only screen and (max-width: 1400px) {
+    input[type="text"], input[type="text"]:disabled{
+    font-weight: 600;
+    color: black;
+    width: 100%;
+    font-size: 18px;
+    }
 }
+@media only screen and (max-width: 500px) {
+    input[type="text"], input[type="text"]:disabled{
+    font-weight: 500;
+    font-size: 15px;
+    }
+}
+
 .icons {
     @extend %flex_row;
     margin-top: 8px;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+.form-control + .form-control {
+  margin-top: 1em;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  font: inherit;
+  color: black;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.1em solid black;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  margin-top: 5px;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em $form-control-color;
+}
+
+input[type="checkbox"]:checked::before {
+    margin-left: -5px;
+    margin-bottom: -5px;
+    transform: scale(2);
 }
 </style>

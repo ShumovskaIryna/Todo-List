@@ -168,7 +168,8 @@ h3 {
   margin: 0 5px;
 }
 .current {
-  width: 20px;
-  background-color: grey;
+  background-color: rgb(186, 185, 185);
+  font-weight: 600;
+  color: black;
 }
 </style>
